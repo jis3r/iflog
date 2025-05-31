@@ -1,95 +1,101 @@
+const IS_DEV =
+  typeof process !== "undefined" &&
+  process.env &&
+  process.env.NODE_ENV !== "production";
+
 const iflog = {
   assert: (condition, ...args) => {
-    console.assert(condition, ...args);
+    if (IS_DEV) console.assert(condition, ...args);
   },
   clear: () => {
-    console.clear();
+    if (IS_DEV) console.clear();
   },
   count: (label) => {
-    console.count(label);
+    if (IS_DEV) console.count(label);
   },
   countReset: (label) => {
-    console.countReset(label);
+    if (IS_DEV) console.countReset(label);
   },
   debug: (...args) => {
-    console.debug(...args);
+    if (IS_DEV) console.debug(...args);
   },
   dir: (...args) => {
-    console.dir(...args);
+    if (IS_DEV) console.dir(...args);
   },
   dirxml: (...args) => {
-    if (console.dirxml) {
-      console.dirxml(...args);
-    } else {
-      // fallback to dir if dirxml is not available
-      console.dir(...args);
+    if (IS_DEV) {
+      if (console.dirxml) {
+        console.dirxml(...args);
+      } else {
+        // fallback to dir if dirxml is not available
+        console.dir(...args);
+      }
     }
   },
   error: (...args) => {
-    console.error(...args);
+    if (IS_DEV) console.error(...args);
   },
   exception: (...args) => {
-    // Deprecated, alias for error
-    console.error(...args);
+    if (IS_DEV) console.error(...args);
   },
   group: (...args) => {
-    console.group(...args);
+    if (IS_DEV) console.group(...args);
   },
   groupCollapsed: (...args) => {
-    console.groupCollapsed(...args);
+    if (IS_DEV) console.groupCollapsed(...args);
   },
   groupEnd: () => {
-    console.groupEnd();
+    if (IS_DEV) console.groupEnd();
   },
   info: (...args) => {
-    console.info(...args);
+    if (IS_DEV) console.info(...args);
   },
   log: (...args) => {
-    console.log(...args);
+    if (IS_DEV) console.log(...args);
   },
   profile: (label) => {
-    if (console.profile) {
+    if (IS_DEV && console.profile) {
       console.profile(label);
     }
   },
   profileEnd: (label) => {
-    if (console.profileEnd) {
+    if (IS_DEV && console.profileEnd) {
       console.profileEnd(label);
     }
   },
   table: (tabularData, properties) => {
-    console.table(tabularData, properties);
+    if (IS_DEV) console.table(tabularData, properties);
   },
   time: (label) => {
-    console.time(label);
+    if (IS_DEV) console.time(label);
   },
   timeEnd: (label) => {
-    console.timeEnd(label);
+    if (IS_DEV) console.timeEnd(label);
   },
   timeLog: (label, ...args) => {
-    if (console.timeLog) {
+    if (IS_DEV && console.timeLog) {
       console.timeLog(label, ...args);
     }
   },
   timeStamp: (label) => {
-    if (console.timeStamp) {
+    if (IS_DEV && console.timeStamp) {
       console.timeStamp(label);
     }
   },
   trace: (...args) => {
-    console.trace(...args);
+    if (IS_DEV) console.trace(...args);
   },
   warn: (...args) => {
-    console.warn(...args);
+    if (IS_DEV) console.warn(...args);
   },
   enable: () => {
-    console.log("iflog enabled");
+    if (IS_DEV) console.log("iflog enabled");
   },
   disable: () => {
-    console.log("iflog disabled");
+    if (IS_DEV) console.log("iflog disabled");
   },
   isEnabled: () => {
-    return true;
+    return IS_DEV;
   },
 };
 

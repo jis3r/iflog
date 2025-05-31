@@ -1,6 +1,6 @@
 {
   "name": "iflog",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A conditional console.log that can be toggled on demand",
   "main": "index.js",
   "type": "module",
@@ -35,6 +35,7 @@
     "shortcuts",
     "toggle",
     "javascript",
+    "node",
     "utility"
   ]
 }
