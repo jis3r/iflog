@@ -1,6 +1,6 @@
 {
   "name": "iflog",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A conditional console.log that can be toggled on demand",
   "main": "index.js",
   "type": "module",

@@ -1,29 +1,44 @@
-const IS_DEV =
-  typeof process !== "undefined" &&
-  process.env &&
-  process.env.NODE_ENV !== "production";
+const isDev = () => {
+  if (
+    typeof process !== "undefined" &&
+    process.env &&
+    typeof process.env.NODE_ENV === "string"
+  ) {
+    return (
+      process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
+    );
+  }
+  if (
+    typeof import.meta !== "undefined" &&
+    import.meta.env &&
+    typeof import.meta.env.DEV !== "undefined"
+  ) {
+    return import.meta.env.DEV === true;
+  }
+  return false;
+};
 
 const iflog = {
   assert: (condition, ...args) => {
-    if (IS_DEV) console.assert(condition, ...args);
+    if (isDev()) console.assert(condition, ...args);
   },
   clear: () => {
-    if (IS_DEV) console.clear();
+    if (isDev()) console.clear();
   },
   count: (label) => {
-    if (IS_DEV) console.count(label);
+    if (isDev()) console.count(label);
   },
   countReset: (label) => {
-    if (IS_DEV) console.countReset(label);
+    if (isDev()) console.countReset(label);
   },
   debug: (...args) => {
-    if (IS_DEV) console.debug(...args);
+    if (isDev()) console.debug(...args);
   },
   dir: (...args) => {
-    if (IS_DEV) console.dir(...args);
+    if (isDev()) console.dir(...args);
   },
   dirxml: (...args) => {
-    if (IS_DEV) {
+    if (isDev()) {
       if (console.dirxml) {
         console.dirxml(...args);
       } else {
@@ -33,69 +48,69 @@ const iflog = {
     }
   },
   error: (...args) => {
-    if (IS_DEV) console.error(...args);
+    if (isDev()) console.error(...args);
   },
   exception: (...args) => {
-    if (IS_DEV) console.error(...args);
+    if (isDev()) console.error(...args);
   },
   group: (...args) => {
-    if (IS_DEV) console.group(...args);
+    if (isDev()) console.group(...args);
   },
   groupCollapsed: (...args) => {
-    if (IS_DEV) console.groupCollapsed(...args);
+    if (isDev()) console.groupCollapsed(...args);
   },
   groupEnd: () => {
-    if (IS_DEV) console.groupEnd();
+    if (isDev()) console.groupEnd();
   },
   info: (...args) => {
-    if (IS_DEV) console.info(...args);
+    if (isDev()) console.info(...args);
   },
   log: (...args) => {
-    if (IS_DEV) console.log(...args);
+    if (isDev()) console.log(...args);
   },
   profile: (label) => {
-    if (IS_DEV && console.profile) {
+    if (isDev() && console.profile) {
       console.profile(label);
     }
   },
   profileEnd: (label) => {
-    if (IS_DEV && console.profileEnd) {
+    if (isDev() && console.profileEnd) {
       console.profileEnd(label);
     }
   },
   table: (tabularData, properties) => {
-    if (IS_DEV) console.table(tabularData, properties);
+    if (isDev()) console.table(tabularData, properties);
   },
   time: (label) => {
-    if (IS_DEV) console.time(label);
+    if (isDev()) console.time(label);
   },
   timeEnd: (label) => {
-    if (IS_DEV) console.timeEnd(label);
+    if (isDev()) console.timeEnd(label);
   },
   timeLog: (label, ...args) => {
-    if (IS_DEV && console.timeLog) {
+    if (isDev() && console.timeLog) {
       console.timeLog(label, ...args);
     }
   },
   timeStamp: (label) => {
-    if (IS_DEV && console.timeStamp) {
+    if (isDev() && console.timeStamp) {
       console.timeStamp(label);
     }
   },
   trace: (...args) => {
-    if (IS_DEV) console.trace(...args);
+    if (isDev()) console.trace(...args);
   },
   warn: (...args) => {
-    if (IS_DEV) console.warn(...args);
+    if (isDev()) console.warn(...args);
   },
   enable: () => {
-    if (IS_DEV) console.log("iflog enabled");
+    if (isDev()) console.log("iflog enabled");
   },
   disable: () => {
-    if (IS_DEV) console.log("iflog disabled");
+    if (isDev()) console.log("iflog disabled");
   },
   isEnabled: () => {
-    return IS_DEV;
+    return isDev();
   },
 };
 
