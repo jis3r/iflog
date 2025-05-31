@@ -1,0 +1,25 @@
+{
+  "name": "iflog",
+  "version": "0.0.1",
+  "description": "A conditional console.log that can be toggled on demand",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jis3r/iflog.git"
+  },
+  "author": "jis3r",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jis3r/iflog/issues"
+  },
+  "homepage": "https://github.com/jis3r/iflog#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.1.4",
+    "vitest": "^3.1.4"
+  }
+}
