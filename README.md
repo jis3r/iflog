@@ -11,7 +11,7 @@ A conditional console utility that only logs in development mode. It wraps all s
 ## Installation
 
 ```bash
-npm install iflog
+npm i iflog
 ```
 
 ## Usage
