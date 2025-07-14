@@ -340,3 +340,51 @@ describe("iflog in production mode", () => {
     expect(iflog.isEnabled()).toBe(false);
   });
 });
+
+describe("iflog URL parameter override", () => {
+  let originalEnv;
+  let originalWindow;
+  let logSpy;
+
+  beforeEach(() => {
+    originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "production";
+    logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    // Mock window and location
+    originalWindow = global.window;
+    global.window = {
+      location: {
+        search: "?iflog=true"
+      }
+    };
+  });
+
+  afterEach(() => {
+    process.env.NODE_ENV = originalEnv;
+    logSpy.mockRestore();
+    global.window = originalWindow;
+  });
+
+  it("should enable logging in production if ?iflog=true is present", async () => {
+    const { default: iflog } = await import("../index.js?url1" + Date.now());
+    iflog.log("should log");
+    expect(logSpy).toHaveBeenCalledWith("should log");
+    expect(iflog.isEnabled()).toBe(true);
+  });
+
+  it("should not enable logging in production if ?iflog=false is present", async () => {
+    global.window.location.search = "?iflog=false";
+    const { default: iflog } = await import("../index.js?url2" + Date.now());
+    iflog.log("should not log");
+    expect(logSpy).not.toHaveBeenCalled();
+    expect(iflog.isEnabled()).toBe(false);
+  });
+
+  it("should not enable logging in production if ?iflog param is missing", async () => {
+    global.window.location.search = "";
+    const { default: iflog } = await import("../index.js?url3" + Date.now());
+    iflog.log("should not log");
+    expect(logSpy).not.toHaveBeenCalled();
+    expect(iflog.isEnabled()).toBe(false);
+  });
+});

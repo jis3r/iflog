@@ -1,4 +1,15 @@
 const isDev = () => {
+  // URL parameter override
+  if (typeof window !== 'undefined' && window.location) {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('iflog') === 'true') {
+        return true;
+      }
+    } catch (e) {
+      // Ignore errors (e.g., in non-browser environments)
+    }
+  }
   if (
     typeof process !== "undefined" &&
     process.env &&
