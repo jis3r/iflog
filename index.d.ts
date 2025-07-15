@@ -1,0 +1,30 @@
+declare const iflog: {
+  assert(condition: unknown, ...args: unknown[]): void;
+  clear(): void;
+  count(label?: string): void;
+  countReset(label?: string): void;
+  debug(...args: unknown[]): void;
+  dir(...args: unknown[]): void;
+  dirxml(...args: unknown[]): void;
+  error(...args: unknown[]): void;
+  exception(...args: unknown[]): void;
+  group(...args: unknown[]): void;
+  groupCollapsed(...args: unknown[]): void;
+  groupEnd(): void;
+  info(...args: unknown[]): void;
+  log(...args: unknown[]): void;
+  profile(label?: string): void;
+  profileEnd(label?: string): void;
+  table(tabularData?: any, properties?: readonly string[]): void;
+  time(label?: string): void;
+  timeEnd(label?: string): void;
+  timeLog(label?: string, ...args: unknown[]): void;
+  timeStamp(label?: string): void;
+  trace(...args: unknown[]): void;
+  warn(...args: unknown[]): void;
+  enable(): void;
+  disable(): void;
+  isEnabled(): boolean;
+};
+
+export default iflog; 
